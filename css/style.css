@@ -527,7 +527,12 @@ body {
 
 /* 메시지 텍스트 강제 적용 (매우 중요) */
 .message-content * {
-    color: inherit !important;
+    color: #ffffff !important;
+}
+
+.chatbot-message,
+.chatbot-message * {
+    color: #ffffff !important;
 }
 
 .message-content {
@@ -732,7 +737,7 @@ body {
     position: absolute;
     top: 20px;
     right: 20px;
-    background: linear-gradient(135deg, #402fb5, #cf30aa);
+    background: linear-gradient(135deg, #3b82f6, #0ea5e9);
     border: none;
     border-radius: 8px;
     color: white;
@@ -749,7 +754,7 @@ body {
 
 .share-btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
 }
 
 .share-btn:active {
