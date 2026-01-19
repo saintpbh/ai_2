@@ -359,8 +359,51 @@ document.addEventListener('DOMContentLoaded', () => {
     setupButton.addEventListener('click', openSetupPanel);
     setupClose.addEventListener('click', closeSetupPanel);
     saveSettingsBtn.addEventListener('click', saveSettings);
-    // testApiBtn.addEventListener('click', testApiConnection); // 테스트 버튼은 일단 보류
+    testApiBtn.addEventListener('click', testApiConnection);
     resetSettingsBtn.addEventListener('click', resetSettings);
+
+    // API 연결 테스트 함수
+    async function testApiConnection() {
+        const apiKey = apiKeyInput.value.trim();
+        const assistantId = assistantIdInput.value.trim();
+
+        if (!apiKey || !assistantId) {
+            alert('API 키와 Assistant ID를 모두 입력해주세요.');
+            return;
+        }
+
+        testApiBtn.disabled = true;
+        testApiBtn.textContent = '확인 중...';
+        statusText.textContent = '연결 확인 중...';
+        statusIndicator.className = 'status-indicator'; // 노란색(기본)
+
+        try {
+            // Assistant 정보 조회 (단순 GET 요청으로 유효성 검사)
+            const response = await fetch(`${OPENAI_API_BASE}/assistants/${assistantId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    'OpenAI-Beta': 'assistants=v2'
+                }
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                updateApiStatus(true, `연결 성공! (${data.name})`);
+                alert(`성공적으로 연결되었습니다!\n어시스턴트 이름: ${data.name}\n모델: ${data.model}`);
+            } else {
+                throw new Error(data.error?.message || '연결 실패');
+            }
+        } catch (error) {
+            console.error('API Test Error:', error);
+            updateApiStatus(false, '연결 실패');
+            alert(`연결 실패: ${error.message}\n키와 ID를 확인해주세요.`);
+        } finally {
+            testApiBtn.disabled = false;
+            testApiBtn.textContent = '연결 테스트';
+        }
+    }
 
     chatbotClose.addEventListener('click', closeChatbotModal);
     chatbotSendBtn.addEventListener('click', sendMessage);
