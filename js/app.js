@@ -336,11 +336,14 @@ function showTypingIndicator() {
 function replaceTypingIndicatorWithResponse(response) {
     const indicator = document.getElementById('typing-indicator');
     if (indicator) {
+        // Remove raw citation markers (handle variations like 【4:4 † source】 or 【4:4†source】)
+        const cleanResponse = response.replace(/【\d+:\d+[^】]*】/g, '');
+
         // 응답 텍스트에만 히스토리 저장 (타이핑 인디케이터는 제외)
-        conversationHistory.push({ sender: 'bot', content: response, timestamp: new Date() });
+        conversationHistory.push({ sender: 'bot', content: cleanResponse, timestamp: new Date() });
 
         // Markdown 파싱
-        const parsedContent = typeof marked !== 'undefined' ? marked.parse(response) : response.replace(/\n/g, '<br>');
+        const parsedContent = typeof marked !== 'undefined' ? marked.parse(cleanResponse) : cleanResponse.replace(/\n/g, '<br>');
 
         indicator.innerHTML = `<div class="message-content">${parsedContent}</div>`;
         indicator.id = ''; // ID 제거
