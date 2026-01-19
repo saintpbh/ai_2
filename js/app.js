@@ -427,14 +427,14 @@ document.addEventListener('DOMContentLoaded', () => {
         saveBtn.addEventListener('click', saveConversation);
     }
 
-    searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.isComposing) {
             openChatbotModal(searchInput.value);
             searchInput.value = '';
         }
     });
 
-    chatbotInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') sendMessage();
+    chatbotInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.isComposing) sendMessage();
     });
 });
