@@ -4,6 +4,7 @@ let isSetupPanelOpen = false;
 let conversationHistory = [];
 let conversationCount = 0;
 let MAX_CONVERSATIONS = 10;
+let constitutionContext = ""; // 헌법 전문 텍스트 저장용 변수
 
 // AI 설정 관리
 let aiSettings = {
@@ -62,7 +63,7 @@ async function callChatGPTAPI(userMessage, conversationHistory) {
         const messages = [
             {
                 role: "system",
-                content: aiSettings.systemPrompt
+                content: aiSettings.systemPrompt + (constitutionContext ? `\n\n[참고 자료: 한국기독교장로회 헌법 전문]\n${constitutionContext}\n\n위 헌법 전문을 바탕으로 답변하세요.` : "")
             }
         ];
 
@@ -862,9 +863,27 @@ document.addEventListener('DOMContentLoaded', async function () {
     // 입력창 초기화 및 자동완성 방지
     clearInputFields();
 
+    // 헌법 텍스트 로드
+    loadConstitutionText();
+
     // API 상태 확인
     checkApiStatus();
 });
+
+// 헌법 텍스트 파일 로드 함수
+async function loadConstitutionText() {
+    try {
+        const response = await fetch('data/constitution.txt');
+        if (response.ok) {
+            constitutionContext = await response.text();
+            console.log('헌법 텍스트 로드 완료:', constitutionContext.substring(0, 50) + '...');
+        } else {
+            console.warn('헌법 텍스트 파일을 찾을 수 없습니다.');
+        }
+    } catch (error) {
+        console.error('헌법 텍스트 로드 실패:', error);
+    }
+}
 
 // 입력창 초기화 및 자동완성 방지
 function clearInputFields() {
