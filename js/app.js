@@ -182,16 +182,16 @@ function loadSettingsToUI() {
     maxConversationsInput.value = MAX_CONVERSATIONS;
 }
 
-function saveSettings() {
+function saveSettings(showAlert = true) {
     const apiKey = apiKeyInput.value.trim();
     const assistantId = assistantIdInput.value.trim();
 
     if (!apiKey) {
-        alert('API 키를 입력해주세요.');
+        if (showAlert) alert('API 키를 입력해주세요.');
         return;
     }
     if (!assistantId) {
-        alert('Assistant ID를 입력해주세요.');
+        if (showAlert) alert('Assistant ID를 입력해주세요.');
         return;
     }
 
@@ -205,7 +205,7 @@ function saveSettings() {
     updateConversationCounter();
     checkApiStatus();
 
-    alert('설정이 저장되었습니다!');
+    if (showAlert) alert('설정이 저장되었습니다!');
 }
 
 function resetSettings() {
@@ -357,8 +357,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 버튼 이벤트
     setupButton.addEventListener('click', openSetupPanel);
-    setupClose.addEventListener('click', closeSetupPanel);
-    saveSettingsBtn.addEventListener('click', saveSettings);
+    setupClose.addEventListener('click', () => {
+        saveSettings(false); // 닫을 때 조용히 저장 (showAlert=false)
+        closeSetupPanel();
+    });
+    saveSettingsBtn.addEventListener('click', () => saveSettings(true)); // 저장 버튼은 알림 표시 (showAlert=true)
     testApiBtn.addEventListener('click', testApiConnection);
     resetSettingsBtn.addEventListener('click', resetSettings);
 
