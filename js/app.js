@@ -281,8 +281,38 @@ function sendMessage() {
     processUserMessage(message);
 }
 
+// 대화 내용 저장 함수
+function saveConversation() {
+    if (conversationHistory.length === 0) {
+        alert('저장할 대화 내용이 없습니다.');
+        return;
+    }
+
+    let content = "한국기독교장로회 헌법 AI 상담 기록\n";
+    content += `저장 일시: ${new Date().toLocaleString()}\n`;
+    content += "========================================\n\n";
+
+    conversationHistory.forEach(msg => {
+        const role = msg.sender === 'user' ? '질문자' : 'AI 어시스턴트';
+        content += `[${role}]\n${msg.content}\n\n`;
+    });
+
+    content += "========================================\n";
+    content += "본 내용은 AI에 의해 생성되었으며, 법적 효력이 없습니다.";
+
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `PROK_헌법상담_${new Date().toISOString().slice(0, 10)}.txt`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+}
+
 // UI 헬퍼 함수들
 function addMessage(sender, content) {
+    // 히스토리 저장
+    conversationHistory.push({ sender, content, timestamp: new Date() });
+
     const messageDiv = document.createElement('div');
     messageDiv.className = `chatbot-message ${sender}`;
     messageDiv.innerHTML = `<div class="message-content">${content.replace(/\n/g, '<br>')}</div>`; // 간단한 마크다운 처리 필요시 추가
@@ -302,11 +332,11 @@ function showTypingIndicator() {
 function replaceTypingIndicatorWithResponse(response) {
     const indicator = document.getElementById('typing-indicator');
     if (indicator) {
+        // 응답 텍스트에만 히스토리 저장 (타이핑 인디케이터는 제외)
+        conversationHistory.push({ sender: 'bot', content: response, timestamp: new Date() });
+
         indicator.innerHTML = `<div class="message-content">${response.replace(/\n/g, '<br>')}</div>`;
         indicator.id = ''; // ID 제거
-
-        // **[104회 총회 회의록.pdf]** 같은 출처 제거 (선택 사항)
-        // const cleanResponse = response.replace(/【.*?】/g, ''); 
     }
 }
 
@@ -334,6 +364,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     chatbotClose.addEventListener('click', closeChatbotModal);
     chatbotSendBtn.addEventListener('click', sendMessage);
+
+    // 대화 저장 버튼 이벤트 연결
+    const saveBtn = document.getElementById('save-chat-btn');
+    if (saveBtn) {
+        saveBtn.addEventListener('click', saveConversation);
+    }
 
     searchInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
