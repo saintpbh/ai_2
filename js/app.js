@@ -97,8 +97,8 @@ async function sendMessageToAssistant(message) {
             },
             body: JSON.stringify({
                 assistant_id: aiSettings.assistantId,
-                // Enforce strict citation format on every run
-                additional_instructions: "You must precisely cite the reference material for every statement. The citation format must be: [Source: Document Name, p.Page Number]. Example: [Source: 104th General Assembly Minutes, p.123]. Ensure all responses are based strictly on the provided files."
+                // Enforce strict citation and grounding (Anti-Hallucination)
+                additional_instructions: "Answer the user's question using ONLY the provided files. Do NOT use outside knowledge or general information. If the answer is not found in the documents, state clearly: 'The provided documents do not contain information about [topic].' You must precisely cite the source for every statement in the format: [Source: Document, p.Page]. Example: [Source: 104th Minutes, p.123]."
             })
         });
 
