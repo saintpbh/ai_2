@@ -517,24 +517,24 @@ body {
 }
 
 .message-content.bot {
-    background: rgba(207, 48, 170, 0.15);
-    /* 배경색 약간 더 진하게 */
-    color: #ffffff;
-    /* 흰색으로 변경 */
-    border: 1px solid rgba(207, 48, 170, 0.3);
-    font-weight: 400;
-    /* 가독성 향상 */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-    /* 그림자 진하게 */
-    letter-spacing: 0.3px;
-    /* 자간 확보 */
+    background: rgba(207, 48, 170, 0.25);
+    /* 배경색 좀 더 밝게 */
+    color: #ffffff !important;
+    /* 강제 흰색 적용 */
+    border: 1px solid rgba(207, 48, 170, 0.4);
+    font-weight: 500;
+    /* 폰트 두께 증가 */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+    /* 그림자 더 진하게 */
+    letter-spacing: 0.5px;
 }
 
 .message-content.user {
     background: linear-gradient(135deg, #402fb5, #cf30aa);
-    color: white;
-    font-weight: 500;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    color: #ffffff !important;
+    /* 강제 흰색 적용 */
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 /* 챗봇 입력 영역 */
