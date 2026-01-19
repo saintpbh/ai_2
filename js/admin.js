@@ -30,18 +30,55 @@ fileInput.addEventListener('change', () => {
     }
 });
 
+// 탭 전환 로직
+let currentTab = 'file'; // 'file' or 'text'
+window.switchTab = function (tabId) {
+    currentTab = tabId;
+
+    // 탭 버튼 활성화
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // 탭 내용 활성화
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    document.getElementById(`tab-${tabId}`).classList.add('active');
+};
+
 // 메인 생성 로직
 createBtn.addEventListener('click', async () => {
     const apiKey = apiKeyInput.value.trim();
-    const files = fileInput.files;
+    let files = [];
 
     if (!apiKey) {
         alert('API 키를 입력해주세요.');
         return;
     }
-    if (files.length === 0) {
-        alert('업로드할 파일을 선택해주세요.');
-        return;
+
+    // 탭에 따라 파일 소스 결정
+    if (currentTab === 'file') {
+        files = Array.from(fileInput.files);
+        if (files.length === 0) {
+            alert('업로드할 파일을 선택해주세요.');
+            return;
+        }
+    } else if (currentTab === 'text') {
+        const filename = document.getElementById('md-filename').value.trim();
+        const content = document.getElementById('md-content').value.trim();
+
+        if (!filename) {
+            alert('파일 이름을 입력해주세요.');
+            return;
+        }
+        if (!content) {
+            alert('내용을 입력해주세요.');
+            return;
+        }
+
+        // 텍스트를 Markdown 파일(Blob)로 변환
+        const blob = new Blob([content], { type: 'text/markdown' });
+        // File 객체 생성 (IE/Edge 구버전 호환성 문제 시 Blob 사용 로직 분기 필요하지만 모던 브루저는 File 생성자 지원)
+        const file = new File([blob], `${filename}.md`, { type: 'text/markdown' });
+        files = [file];
     }
 
     createBtn.disabled = true;

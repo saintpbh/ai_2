@@ -122,6 +122,72 @@
             gap: 10px;
             margin-top: 10px;
         }
+
+        /* 탭 스타일 추가 */
+        .tab-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #aaa;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .tab-btn.active {
+            background: #6366f1;
+            color: #fff;
+            border-color: #6366f1;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        textarea {
+            width: 100%;
+            height: 300px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #fff;
+            font-family: monospace;
+            line-height: 1.6;
+            margin-top: 10px;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -139,10 +205,37 @@
         </div>
 
         <div class="section">
-            <h3>2. 헌법/회의록 파일 선택 (PDF)</h3>
-            <p style="font-size: 0.9em; color: #ccc;">가지고 계신 모든 PDF 파일을 한 번에 선택해주세요.</p>
-            <input type="file" id="file-input" multiple accept=".pdf,.txt,.docx">
-            <div id="file-list" style="margin-top: 10px; font-size: 0.9em; color: #aaa;"></div>
+            <h3>2. 학습 데이터 업로드</h3>
+            <p style="font-size: 0.9em; color: #ccc; margin-bottom: 20px;">
+                PDF 파일을 직접 올리거나, 텍스트를 복사/붙여넣기하여 최적화된 데이터(Markdown)로 변환할 수 있습니다.
+            </p>
+
+            <div class="tab-container">
+                <button class="tab-btn active" onclick="switchTab('file')">📂 파일 선택 (PDF 등)</button>
+                <button class="tab-btn" onclick="switchTab('text')">📝 텍스트 직접 등록 (추천)</button>
+            </div>
+
+            <!-- 탭 1: 파일 업로드 -->
+            <div id="tab-file" class="tab-content active">
+                <p style="font-size: 0.9em; color: #aaa;">가지고 계신 PDF, Word 파일을 선택해주세요. (단순 업로드)</p>
+                <input type="file" id="file-input" multiple accept=".pdf,.txt,.docx,.md,.hwp">
+                <div id="file-list" style="margin-top: 10px; font-size: 0.9em; color: #aaa;"></div>
+            </div>
+
+            <!-- 탭 2: 텍스트 직접 등록 -->
+            <div id="tab-text" class="tab-content">
+                <p style="font-size: 0.9em; color: #a5b4fc; margin-bottom: 10px;">
+                    💡 <strong>팁:</strong> 원본 파일(한글/워드) 내용을 복사해서 아래에 붙여넣으세요.<br>
+                    큰 제목 앞에 <strong>#</strong> 기호를 붙여주면 AI가 훨씬 똑똑해집니다.
+                </p>
+
+                <label style="font-size: 0.9em; color: #ddd;">저장할 파일명 (확장자 제외)</label>
+                <input type="text" id="md-filename" placeholder="예: 제105회_총회_회의록">
+
+                <label style="font-size: 0.9em; color: #ddd;">내용 본문</label>
+                <textarea id="md-content"
+                    placeholder="# 제1편 헌법의 원리&#10;&#10;제1장 원리&#10;&#10;제1조 (구성) 대한예수교장로회는..."></textarea>
+            </div>
         </div>
 
         <button id="create-btn" class="btn">🚀 AI 어시스턴트 생성 및 학습 시작</button>
