@@ -1,0 +1,14 @@
+{
+  "openai": {
+    "apiKey": "your-openai-api-key-here",
+    "model": "gpt-3.5-turbo",
+    "maxTokens": 500,
+    "temperature": 0.7
+  },
+  "app": {
+    "maxConversations": 10,
+    "saveHistory": false,
+    "typingAnimation": true,
+    "systemPrompt": "당신은 한국기독교장로회 헌법 전문가입니다. 사용자의 질문에 대해 헌법에 근거하여 정확하고 친근하게 답변해주세요. 답변은 한국어로 하며, 헌법 조항을 인용할 때는 구체적으로 언급해주세요."
+  }
+} 
