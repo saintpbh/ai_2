@@ -525,6 +525,11 @@ body {
     color: white;
 }
 
+/* 메시지 텍스트 강제 적용 (매우 중요) */
+.message-content * {
+    color: inherit !important;
+}
+
 .message-content {
     max-width: 70%;
     padding: 14px 18px;
@@ -561,8 +566,8 @@ body {
 /* 챗봇 입력 영역 */
 .chatbot-input-area {
     padding: 20px;
-    border-top: 1px solid rgba(207, 48, 170, 0.2);
-    background: rgba(207, 48, 170, 0.05);
+    border-top: 1px solid rgba(56, 189, 248, 0.2);
+    background: rgba(15, 23, 42, 0.4);
     border-radius: 0 0 20px 20px;
 }
 
@@ -574,8 +579,8 @@ body {
 
 .chatbot-input {
     flex: 1;
-    background: rgba(1, 2, 1, 0.9);
-    border: 1px solid rgba(207, 48, 170, 0.3);
+    background: rgba(10, 15, 30, 0.85);
+    border: 1px solid rgba(56, 189, 248, 0.3);
     border-radius: 20px;
     color: #ffffff;
     padding: 12px 16px;
@@ -589,8 +594,8 @@ body {
 
 .chatbot-input:focus {
     outline: none;
-    border-color: #cf30aa;
-    box-shadow: 0 0 0 2px rgba(207, 48, 170, 0.2);
+    border-color: #0ea5e9;
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
 }
 
 .chatbot-input:disabled {
@@ -635,9 +640,9 @@ body {
     display: flex;
     gap: 4px;
     padding: 12px 16px;
-    background: rgba(207, 48, 170, 0.1);
+    background: rgba(15, 23, 42, 0.6);
     border-radius: 18px;
-    border: 1px solid rgba(207, 48, 170, 0.2);
+    border: 1px solid rgba(56, 189, 248, 0.2);
     width: fit-content;
 }
 
@@ -694,8 +699,8 @@ body {
     position: absolute;
     top: 8px;
     right: 8px;
-    background: rgba(207, 48, 170, 0.2);
-    border: 1px solid rgba(207, 48, 170, 0.3);
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.3);
     border-radius: 6px;
     color: #c0b9c0;
     padding: 4px 8px;
@@ -711,7 +716,7 @@ body {
 }
 
 .copy-btn:hover {
-    background: rgba(207, 48, 170, 0.3);
+    background: rgba(56, 189, 248, 0.3);
     color: #ffffff;
     transform: scale(1.05);
 }
@@ -744,7 +749,7 @@ body {
 
 .share-btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(207, 48, 170, 0.3);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
 }
 
 .share-btn:active {
@@ -765,12 +770,12 @@ body {
     position: absolute;
     top: 20px;
     right: 80px;
-    background: rgba(207, 48, 170, 0.2);
-    color: #c0b9c0;
+    background: rgba(15, 23, 42, 0.4);
+    color: #94a3b8;
     padding: 4px 12px;
     border-radius: 12px;
     font-size: 0.8rem;
-    border: 1px solid rgba(207, 48, 170, 0.3);
+    border: 1px solid rgba(56, 189, 248, 0.3);
 }
 
 /* 스크롤바 스타일 */
@@ -779,17 +784,17 @@ body {
 }
 
 .chatbot-messages::-webkit-scrollbar-track {
-    background: rgba(207, 48, 170, 0.1);
+    background: rgba(15, 23, 42, 0.1);
     border-radius: 3px;
 }
 
 .chatbot-messages::-webkit-scrollbar-thumb {
-    background: rgba(207, 48, 170, 0.3);
+    background: rgba(56, 189, 248, 0.2);
     border-radius: 3px;
 }
 
 .chatbot-messages::-webkit-scrollbar-thumb:hover {
-    background: rgba(207, 48, 170, 0.5);
+    background: rgba(56, 189, 248, 0.4);
 }
 
 /* 셋업 버튼 스타일 */
@@ -805,7 +810,7 @@ body {
     color: white;
     font-size: 24px;
     cursor: pointer;
-    box-shadow: 0 4px 20px rgba(207, 48, 170, 0.3);
+    box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
     transition: all 0.3s ease;
     z-index: 1000;
     display: flex;
@@ -815,7 +820,7 @@ body {
 
 .setup-button:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 25px rgba(207, 48, 170, 0.4);
+    box-shadow: 0 6px 25px rgba(56, 189, 248, 0.4);
 }
 
 .setup-button:active {
@@ -853,7 +858,7 @@ body {
     align-items: center;
     margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 1px solid rgba(207, 48, 170, 0.2);
+    border-bottom: 1px solid rgba(56, 189, 248, 0.2);
 }
 
 .setup-title {
@@ -874,7 +879,7 @@ body {
 }
 
 .setup-close:hover {
-    background: rgba(207, 48, 170, 0.2);
+    background: rgba(56, 189, 248, 0.2);
     color: #ffffff;
 }
 
@@ -905,8 +910,8 @@ body {
 
 .setup-input {
     width: 100%;
-    background: rgba(1, 2, 1, 0.8);
-    border: 1px solid rgba(207, 48, 170, 0.3);
+    background: rgba(10, 15, 30, 0.85);
+    border: 1px solid rgba(56, 189, 248, 0.3);
     border-radius: 10px;
     color: #ffffff;
     padding: 10px 12px;
@@ -917,8 +922,8 @@ body {
 
 .setup-input:focus {
     outline: none;
-    border-color: #cf30aa;
-    box-shadow: 0 0 0 2px rgba(207, 48, 170, 0.2);
+    border-color: #0ea5e9;
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
 }
 
 .setup-input::placeholder {
@@ -927,8 +932,8 @@ body {
 
 .setup-select {
     width: 100%;
-    background: rgba(1, 2, 1, 0.8);
-    border: 1px solid rgba(207, 48, 170, 0.3);
+    background: rgba(10, 15, 30, 0.85);
+    border: 1px solid rgba(56, 189, 248, 0.3);
     border-radius: 10px;
     color: #ffffff;
     padding: 10px 12px;
@@ -939,7 +944,7 @@ body {
 
 .setup-select:focus {
     outline: none;
-    border-color: #cf30aa;
+    border-color: #0ea5e9;
 }
 
 .setup-select option {
