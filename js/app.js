@@ -96,7 +96,9 @@ async function sendMessageToAssistant(message) {
                 'OpenAI-Beta': 'assistants=v2'
             },
             body: JSON.stringify({
-                assistant_id: aiSettings.assistantId
+                assistant_id: aiSettings.assistantId,
+                // 실행 시마다 명시적인 지침 추가 (출처 표기 강제)
+                additional_instructions: "답변의 맨 마지막에는 반드시 근거가 된 문서의 이름과 페이지를 다음 형식으로 명시해주세요:\n\n[출처: OO총회 회의록, p.123] 또는 [출처: 한국기독교장로회 헌법 제O조]"
             })
         });
 
