@@ -315,7 +315,11 @@ function addMessage(sender, content) {
 
     const messageDiv = document.createElement('div');
     messageDiv.className = `chatbot-message ${sender}`;
-    messageDiv.innerHTML = `<div class="message-content">${content.replace(/\n/g, '<br>')}</div>`; // 간단한 마크다운 처리 필요시 추가
+
+    // Markdown 파싱 (marked 라이브러리 사용)
+    const parsedContent = typeof marked !== 'undefined' ? marked.parse(content) : content.replace(/\n/g, '<br>');
+
+    messageDiv.innerHTML = `<div class="message-content">${parsedContent}</div>`;
     chatbotMessages.appendChild(messageDiv);
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 }
@@ -335,7 +339,10 @@ function replaceTypingIndicatorWithResponse(response) {
         // 응답 텍스트에만 히스토리 저장 (타이핑 인디케이터는 제외)
         conversationHistory.push({ sender: 'bot', content: response, timestamp: new Date() });
 
-        indicator.innerHTML = `<div class="message-content">${response.replace(/\n/g, '<br>')}</div>`;
+        // Markdown 파싱
+        const parsedContent = typeof marked !== 'undefined' ? marked.parse(response) : response.replace(/\n/g, '<br>');
+
+        indicator.innerHTML = `<div class="message-content">${parsedContent}</div>`;
         indicator.id = ''; // ID 제거
     }
 }
