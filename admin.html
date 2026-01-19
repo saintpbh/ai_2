@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 관리자 페이지 - 헌법 AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            display: block;
+            padding: 40px;
+            overflow-y: auto;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(26, 10, 46, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            color: #fff;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #log-area {
+            background: #111;
+            padding: 15px;
+            border-radius: 5px;
+            height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .log-entry {
+            margin: 5px 0;
+            border-bottom: 1px solid #222;
+            padding-bottom: 2px;
+        }
+
+        .success {
+            color: #4ade80;
+        }
+
+        .error {
+            color: #f87171;
+        }
+
+        .info {
+            color: #60a5fa;
+        }
+
+        .result-box {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid #4ade80;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🤖 AI 어시스턴트 생성 관리자</h1>
+        <p style="text-align: center; color: #aaa; margin-bottom: 30px;">
+            보유하신 헌법 PDF 파일들을 업로드하여 나만의 AI 전문가를 만드세요.
+        </p>
+
+        <div class="section">
+            <h3>1. OpenAI API 키 입력</h3>
+            <p style="font-size: 0.9em; color: #ccc;">PDF 업로드를 위해 잠시 API 키가 필요합니다. (저장되지 않음)</p>
+            <input type="text" id="api-key" placeholder="sk-..." autocomplete="off">
+        </div>
+
+        <div class="section">
+            <h3>2. 헌법/회의록 파일 선택 (PDF)</h3>
+            <p style="font-size: 0.9em; color: #ccc;">가지고 계신 모든 PDF 파일을 한 번에 선택해주세요.</p>
+            <input type="file" id="file-input" multiple accept=".pdf,.txt,.docx">
+            <div id="file-list" style="margin-top: 10px; font-size: 0.9em; color: #aaa;"></div>
+        </div>
+
+        <button id="create-btn" class="btn">🚀 AI 어시스턴트 생성 및 학습 시작</button>
+
+        <div id="result-area" class="result-box">
+            <h3>🎉 생성 완료!</h3>
+            <p>아래 어시스턴트 ID를 복사하여 <strong>index.html의 설정(⚙️)</strong>에 넣어주세요.</p>
+            <div class="copy-box">
+                <input type="text" id="assistant-id-result" readonly>
+                <button onclick="copyResult()"
+                    style="width: 80px; padding: 5px; background: #4ade80; border: none; border-radius: 5px; cursor: pointer; color: #000; font-weight: bold;">복사</button>
+            </div>
+        </div>
+
+        <div class="section" style="margin-top: 30px;">
+            <h3>진행 로그</h3>
+            <div id="log-area"></div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+
+</html>
