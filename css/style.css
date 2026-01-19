@@ -590,11 +590,12 @@ body {
     border-radius: 20px;
     color: #ffffff;
     padding: 12px 16px;
-    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-    /* 폰트 강제 적용 (자소 분리 방지) */
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    /* 폰트 강제 적용 (자소 분리 방지: 시스템 폰트 우선) */
     font-size: 14px;
     letter-spacing: normal;
-    /* 자간 초기화 (자소 분리 방지) */
+    text-shadow: none;
+    /* 자간 초기화 및 텍스트 쉐도우 제거 (자소 분리 방지) */
     resize: none;
     min-height: 44px;
     max-height: 120px;
