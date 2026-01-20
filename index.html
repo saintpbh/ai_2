@@ -166,9 +166,48 @@
 
             <div class="setup-input-group">
                 <label class="setup-label">시스템 프롬프트</label>
-                <textarea class="setup-input" id="system-prompt-input" rows="4"
-                    placeholder="AI의 역할과 행동을 정의하는 프롬프트를 입력하세요...">당신은 한국기독교장로회 헌법 전문가입니다. 사용자의 질문에 대해 헌법에 근거하여 정확하고 친근하게 답변해주세요. 답변은 한국어로 하며, 헌법 조항을 인용할 때는 구체적으로 언급해주세요.</textarea>
+                <textarea class="setup-input" id="system-prompt-input" rows="6"
+                    placeholder="AI의 역할과 행동을 정의하는 프롬프트를 입력하세요...">당신은 한국기독교장로회 헌법 전문가입니다. 
+1. 교회의 징계, 벌칙, 재판은 [권징조례]를 참고하세요.
+2. 신앙과 교리는 [신앙고백서], [신앙요리문답], [신조]를 참고하세요.
+3. 예배와 예식은 [예배모범]을 참고하세요.
+4. 총회/교회 행정, 사례, 처분은 [총회제반규칙집]을 참고하세요.
+답변은 한국어로 하며, 헌법 조항을 구체적으로 인용해주세요.</textarea>
             </div>
+        </div>
+
+        <!-- 공유 옵션 섹션 -->
+        <div class="setup-section">
+            <div class="setup-section-title">공유 설정</div>
+            <div class="setup-info" style="margin-bottom: 10px;">홈페이지에 AI 챗봇을 추가할 수 있는 코드입니다.</div>
+
+            <div class="setup-input-group">
+                <label class="setup-label">1. 기본 버튼형 (우측 하단 아이콘)</label>
+                <div class="copy-box" style="display: flex; gap: 5px;">
+                    <input type="text" class="setup-input" readonly
+                        value='<iframe src="https://saintpbh.github.io/ai_2/" width="350" height="600" style="position:fixed; bottom:20px; right:20px; border:none; border-radius:20px; z-index:9999; box-shadow: 0 10px 30px rgba(0,0,0,0.3);"></iframe>'>
+                    <button class="setup-btn secondary" style="min-width: 50px;"
+                        onclick="copyToClipboard(this.previousElementSibling.value)">복사</button>
+                </div>
+            </div>
+
+            <div class="setup-input-group">
+                <label class="setup-label">2. 검색바 위젯형 (검색 시 팝업)</label>
+                <div class="copy-box" style="display: flex; gap: 5px;">
+                    <input type="text" class="setup-input" readonly
+                        value='<iframe src="https://saintpbh.github.io/ai_2/widget.html" width="100%" height="80" style="border:none;"></iframe>'>
+                    <button class="setup-btn secondary" style="min-width: 50px;"
+                        onclick="copyToClipboard(this.previousElementSibling.value)">복사</button>
+                </div>
+            </div>
+
+            <script>
+                function copyToClipboard(text) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        alert('코드가 복사되었습니다!');
+                    });
+                }
+            </script>
         </div>
 
         <!-- 버튼 영역 -->
