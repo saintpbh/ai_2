@@ -201,6 +201,17 @@
                 </div>
             </div>
 
+            <div class="setup-input-group">
+                <label class="setup-label">3. 이미지 팝업 링크 (iframe 차단 시)</label>
+                <div class="setup-info">이미지를 클릭하면 팝업창으로 대화가 열립니다. (이미지 주소는 본인 것으로 교체 필요)</div>
+                <div class="copy-box" style="display: flex; gap: 5px;">
+                    <input type="text" class="setup-input" readonly
+                        value='<a href="#" onclick="window.open(&apos;https://saintpbh.github.io/ai_2/&apos;, &apos;AI_Chat&apos;, &apos;width=400,height=600,scrollbars=yes&apos;); return false;"><img src="https://via.placeholder.com/300x80?text=AI+Chat+Link" alt="AI Chat" style="border-radius:30px;"></a>'>
+                    <button class="setup-btn secondary" style="min-width: 50px;"
+                        onclick="copyToClipboard(this.previousElementSibling.value)">복사</button>
+                </div>
+            </div>
+
             <script>
                 function copyToClipboard(text) {
                     navigator.clipboard.writeText(text).then(() => {
